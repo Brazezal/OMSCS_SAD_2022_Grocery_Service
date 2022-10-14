@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home-Grocery Express Service</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"   >
+</head>
+<body>
+
+    <div class="container text-center">
+        <h1>Welcome to Grocery Express Service</h1>
+    </div>
+    <div >
+         <ul class="list-group"   th:align="center">
+             <li class="list-group-item-primary"><h3><a th:href="@{/register}">Customer registration </a></h3></li>
+             <li class="list-group-item-primary"><h3><a th:href="@{/pilot/registration}">Pilot registration</a></h3></li>
+             <li class="list-group-item-success"><h3><a th:href="@{/login}">Customer Login</a></h3></li>
+             <li class="list-group-item-success"><h3><a th:href="@{/pilot/login_authen}">Pilot Login</a></h3></li>
+             <li class="list-group-item-success"><h3><a th:href="@{/admin/login_authen}">Admin Login</a></h3></li>
+
+    </div>
+
+</body>
+</html>

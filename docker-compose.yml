@@ -1,0 +1,46 @@
+version: "3.7"
+networks:
+    # the internal network is a bridge network used by the
+    # api container and database
+    # We could also bypass this in favor of port fowarding to the host machine and
+    # communicating over tcp through the host, but this showcases a way to use docker's internal DNS to
+    # resolve networks
+    internal:
+        name: gatech_internal
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 10.17.0.0/16
+services:
+    # api holds all of our backend code
+    api:
+        image: gatech/backend
+        networks:
+            - internal
+        ports:
+            - "8080:8080"
+        environment:
+            # NOTE: db refers to the db service defined below. Docker will automatically resolve this to the container
+            - DB_HOST=db
+            - DB_USER=root
+            - DB_PASS=123456
+            - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/dev?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
+        depends_on:
+            - db
+        # sleep for 5 seconds to give the db time to boot up
+        command: >
+            sh -c "sleep 5 &&
+               java -jar /cs6310/cs6310-0.0.1-SNAPSHOT.jar"
+
+    # db is a mysql instance
+    db:
+        image: mysql:8.0.28
+        networks:
+            - internal
+        environment:            
+            - MYSQL_ROOT_PASSWORD=123456
+            - MYSQL_DATABASE=dev
+            
+        ports:
+            - "5432:3306"

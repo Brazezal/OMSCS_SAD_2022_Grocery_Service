@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration-Grocery Express Service</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"   >
+</head>
+<body>
+
+    <div class="container text-center">
+        <h1>Pilot Registration</h1>
+        <p th:text="${Message}"></p>
+    </div>
+    <div>
+        <form th:action="@{/pilot/process_register}" method="post"
+              style="max-width: 600px;margin:0 auto" th:object="${pilot}" >
+            <div class="m-3">
+                <div class="form-group row">
+                    <label class="col-form-label col-4">Pilot Account</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" th:field="*{accountName}" required/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-4">Phone Number</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" th:field="*{phoneNumber}" required/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4">Password</label>
+                    <div class="col-8">
+                        <input type="password" class="form-control" th:field="*{password}"
+                               required minlength="6" maxlength="10"/>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4">First Name</label>
+
+                    <div class="col-8">
+                        <input type="text" class="form-control" th:field="*{firstName} "required
+                        minlength="2" maxlength="20"/>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4">Last Name</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" th:field="*{lastName}" required
+                               minlength="2" maxlength="20"/>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4">Pilot Tax Id</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" th:field="*{taxID}" required/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4">Pilot License Id</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" th:field="*{licenseID}" required/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4">Pilot Experience</label>
+                    <div class="col-8">
+                        <input type="number" min="1" max="99" class="form-control" th:field="*{experience}" required/>
+                    </div>
+                </div>
+            </div>
+
+<!--            <div  th:object="${role}" class="form-group row">-->
+<!--                <select th:field="*{name}" >-->
+<!--                    <option name="Customer" value="CUSTOMER" >Customer</option>-->
+<!--                    <option name="Admin" value="CUSTOMER">Admin</option>-->
+<!--                    <option name="Pilot" value="CUSTOMER">Pilot</option>-->
+<!--                </select>-->
+<!--            </div>-->
+
+                <div th:align="center">
+                    <button type="submit" class="btn btn-primary"  >Sign up</button>
+                </div>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

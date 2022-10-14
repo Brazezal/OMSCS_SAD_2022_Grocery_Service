@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"   >
+</head>
+<body>
+<!--<div class="container text-center">-->
+<!--    <div>-->
+<!--        <form th:action="@{/logout}" method="post">-->
+<!--            <input type="submit" value="Sign Out">-->
+<!--        </form>-->
+<!--    </div>-->
+<!--    </div>-->
+<div class="container text-center">
+    <h1>Pilot login</h1>
+<p class="text-danger" th:text="${Message}"></p>
+</div>
+<div>
+    <form th:action="@{/pilot/process_login}" method="post"
+          style="max-width: 600px;margin:0 auto" th:object="${pilot}" >
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-4">Pilot License Id</label>
+                <div class="col-8">
+                    <input type="text" class="form-control" th:field="*{licenseID}" required/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Password</label>
+
+                <div class="col-8">
+                    <input type="password" class="form-control" th:field="*{password}"
+                           required minlength="3" maxlength="10"/>
+                </div>
+
+            </div>
+            <div th:align="center">
+                <button type="submit" class="btn btn-primary"  >Login</button>
+<!--                <form  action="" method= "post">-->
+<!--                    <input type="submit" value="Return ">-->
+<!--                </form>-->
+            </div>
+        </div>
+    </form>
+
+</div>
+
+</body>
+</html>

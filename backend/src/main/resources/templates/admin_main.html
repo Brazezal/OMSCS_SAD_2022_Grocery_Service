@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Grocery Express Service</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"   >
+</head>
+<body>
+    <div class="container text-center">
+        <div>
+            <form th:action="@{/logout}" method="post">
+                <p>
+                    Welcome Admin</b>
+                </p>
+                <input class="btn btn-outline-dark" type="submit" value="Sign Out">
+            </form>
+        </div>
+
+
+        <div>
+
+            <div class="container  text-center">
+                <h3 >Admin Control Panel</h3>
+                <ul class="list-group">
+                    <li ><a class="text-success" style="size: A3" th:href="@{/admin/storeManagement}"><h3>Grocery Store Management</h3></a></li>
+                    <li ><a class="text-success" th:href="@{/admin/customerManagement}"><h3>Customer Management</h3></a></li>
+                    <li ><a class="text-success " th:href="@{/admin/pilotManagement}"><h3>Pilot Management</h3></a></li>
+                    <li><a class="text-success" th:href="@{/admin/orderManagement}"><h3>Order Management </h3></a></li>
+                    <li > <a class="text-success" th:href="@{/actuator/logfile}"><h3>System Log</h3></a></li>
+                </ul>
+            </div>
+
+
+    </div>
+
+    </div>
+</body>
+</html>

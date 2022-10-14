@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Grocery Express Service</title>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<script type="text/javascript">
+    $(function () {
+        // alert("success!");
+        $("#d1").hide();
+        $("#b1").click(function () {
+            $("#d1").toggle();
+        })
+        $("#d3").hide();
+        $("#b2").click(function () {
+            $("#d3").toggle();
+        })
+    });
+</script>
+<div class="container text-center">
+    <div>
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+            </p>
+            <input class="btn btn-outline-dark" type="submit" value="Sign Out">
+        </form>
+    </div>
+    <div class="container text-left">
+        <form th:action="@{/customer_main}" method="get">
+            <input class="btn btn-outline-primary" type="submit" value="Return">
+        </form></div>
+
+
+    <div>
+        <ul class="list-group float-left" th:each="customer: ${customer}">
+            <li class="list-group-item" th:text="'User ID:  '+${customer.customerId}"></li>
+            <li class="list-group-item" th:text="'Credits:  '+${customer.restCredits}"></li>
+            <li class="list-group-item" th:text="'First Name:  '+${customer.firstName}"></li>
+            <li class="list-group-item" th:text="'Last Name:  '+${customer.lastName}"></li>
+            <li class="list-group-item" th:text="'Phone Number:  '+${customer.phoneNumber}"></li>
+            <li class="list-group-item" th:text="'Pending order numbers:  '+
+                        ${customer.getOrderEntities().size()}"></li>
+        </ul>
+<!--        new user profile-->
+        <div class="container text-left">
+            <input class="btn btn-primary" type="button" id="b2" value="Edit Profile">
+        </div>
+        <div id="d3">
+            <p> Please input your new information and confirm</p>
+            <form th:action="@{/customer/editCustomerInfo/{customerId} (customerId=${customer.customerId})}" method="post"
+                  th:object="${newCustomer}">
+            <ul  class="list-group " th:each="customer: ${customer}">
+                <li><input th:field="*{customerId}"  th:placeholder="${customer.customerId}" ></li>
+                <li ><input th:field="*{password}" placeholder="New Password" ></li>
+                <li ><input th:field="*{firstName}"   th:placeholder="${customer.firstName}"></li>
+                <li ><input th:field="*{lastName}"  th:placeholder="${customer.lastName}"></li>
+                <li ><input th:field="*{phoneNumber}" th:placeholder="${customer.phoneNumber}" ></li>
+            </ul>
+                <input class="btn btn-primary" type="submit" value="Confirm">
+                <input class="btn btn-secondary" type="reset" value="Reset">
+            </form>
+        </div>
+
+
+
+
+<!--        reload balance-->
+        <div class="container text-left">
+            <input class=" btn btn-primary" type="button" id="b1" value="Reload Your Balance">
+            <p th:text="${Message}"></p>
+        </div>
+    </div>
+    <div id="d1">
+        <form th:action="@{/customer/deposit/{customerId} (customerId=${customer.customerId})}" method="post"
+              th:object="${newCustomer}">
+            <p>
+                <input type="number" th:field="*{restCredits}">
+            </p>
+            <input class="btn btn-success" type="submit" value="Confirm">
+
+        </form>
+    </div>
+</div>
+</body>
+</html>
